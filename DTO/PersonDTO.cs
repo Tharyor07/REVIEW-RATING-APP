@@ -2,6 +2,6 @@
 {
     public class PersonDTO
     {
-        public String Name { get; set; }
+        public string Name { get; set; }
     }
 }

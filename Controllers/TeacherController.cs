@@ -20,6 +20,8 @@ namespace repository_pattern.Controllers
         public IActionResult AddTeacher(AddTeacherDTO teacher)
         {
             // Add Identity user
+            // add user
+
             string userId = "";
 
             _teacher.AddTeacher(teacher, userId);
