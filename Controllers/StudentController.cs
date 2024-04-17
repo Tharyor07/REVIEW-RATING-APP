@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using repository_pattern.DTO;
 using repository_pattern.Model;
 using repository_pattern.Services;
 
@@ -15,7 +16,7 @@ namespace repository_pattern.Controllers
                 _student = student;
         }
         [HttpPost("Create")]
-        public IActionResult AddStudent(Student student)
+        public IActionResult AddStudent(AddStudentDTO student)
         {
             _student.AddStudent(student);
             
@@ -41,6 +42,7 @@ namespace repository_pattern.Controllers
             }
             return Ok(FindStudent);
         }
+
         [HttpGet("all")]
         public IActionResult GetAllStudents()
         {

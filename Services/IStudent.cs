@@ -10,5 +10,6 @@ namespace repository_pattern.Services
         IEnumerable<Student> GetAllStudents();
         bool DeleteStudentById(Guid id);
         ShowStudentDTO UpdateStudentById(Student student);
+
     }
 }

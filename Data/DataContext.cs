@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using repository_pattern.Model;
 using System.Collections.Generic;
 using System.Data.Common;
 
 namespace repository_pattern.Data
 {
-    public class DataContext :DbContext
+    public class DataContext : IdentityDbContext
     {
         public DataContext(DbContextOptions<DataContext> options):base(options)
         {

@@ -6,7 +6,7 @@ namespace repository_pattern.Services
     public interface ITeacher
     {
         //Return type Method_Name
-        void AddTeacher(AddTeacherDTO addTeacherDTO);
+        void AddTeacher(AddTeacherDTO addTeacherDTO,string userId);
         Teacher GetTeacherById(Guid id);
         IEnumerable<Teacher> GetTeachers();
         bool DeleteTeacherById(Guid id);

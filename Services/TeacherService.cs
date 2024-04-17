@@ -11,9 +11,9 @@ namespace repository_pattern.Services
         {
             _dataContext = dataContext;
         }
-        public void AddTeacher(AddTeacherDTO addTeacherDTO)
+        public void AddTeacher(AddTeacherDTO addTeacherDTO,string userId)
         {
-            Teacher teacher = new Teacher(addTeacherDTO);
+            Teacher teacher = new Teacher(addTeacherDTO,userId);
             var add = _dataContext.Teacher.Add(teacher);
             _dataContext.SaveChanges();
         }

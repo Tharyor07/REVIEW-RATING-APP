@@ -19,7 +19,10 @@ namespace repository_pattern.Controllers
         [HttpPost("Create")]
         public IActionResult AddTeacher(AddTeacherDTO teacher)
         {
-            _teacher.AddTeacher(teacher);
+            // Add Identity user
+            string userId = "";
+
+            _teacher.AddTeacher(teacher, userId);
             return Ok("successful");
         }
         [HttpDelete("delete")]
