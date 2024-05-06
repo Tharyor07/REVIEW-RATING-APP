@@ -18,6 +18,8 @@ namespace repository_pattern
             builder.Services.AddScoped<ITeacher, TeacherService>();
             builder.Services.AddScoped<IStudent, StudentService>();
             builder.Services.AddScoped<IAuth, AuthService>();
+            builder.Services.AddScoped<ITokenGenerator, TokenGeneratorService>();
+
 
             string connectivity = builder.Configuration.GetConnectionString("DataConnection");
 

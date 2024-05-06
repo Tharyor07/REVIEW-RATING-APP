@@ -15,5 +15,6 @@ namespace repository_pattern.Data
         public DbSet<Student>Students { get; set; }
         public DbSet<Teacher>Teacher { get; set; }
         public DbSet<Review>Reviews { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }
