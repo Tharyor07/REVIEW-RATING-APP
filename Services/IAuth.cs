@@ -3,10 +3,10 @@ using repository_pattern.Model;
 
 namespace repository_pattern.Services
 {
-    public interface IAuth
+    public interface IAuth 
     {
         Task<string> RegisterUser(RegisterUserDTO registerUserDTO);
-        Task<string> LoginUser(LoginUserDTO loginUserDTO,ApplicationUser user);
+        Task<(bool, AuthResponse)> LoginUser(LoginUserDTO loginUserDTO,ApplicationUser user);
         Task<ApplicationUser> FindUserByUsername(string userName);
     }
 }

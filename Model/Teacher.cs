@@ -11,7 +11,7 @@ namespace repository_pattern.Model
         {
             TeacherId = Guid.NewGuid();
             Rating = 5;
-            Name = addTeacherDTO.Name;
+            Name = addTeacherDTO.FirstName;
             UserId = userId;  
         }
         public Teacher()

@@ -1,7 +1,7 @@
 ﻿namespace repository_pattern.DTO
 {
-    public class PersonDTO
+    public class PersonDTO : RegisterUserDTO
     {
-        public string Name { get; set; }
+
     }
 }

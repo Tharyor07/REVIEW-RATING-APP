@@ -8,6 +8,7 @@ namespace repository_pattern
 {
     public class Program
     {
+        private readonly static string _env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -36,25 +37,32 @@ namespace repository_pattern
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireUppercase = true;
-                options.Password.RequiredLength = 6;
+                options.Password.RequiredLength = 7;
                 options.Password.RequiredUniqueChars = 1;
             }).AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
-
-            builder.Services.AddDbContext<DataContext>(options => options.UseMySql(connectivity,ServerVersion.AutoDetect(connectivity)));
+            if (_env != "Development")
+            {
+                builder.Services.AddDbContext<DataContext>(options => options.UseMySql(Environment.GetEnvironmentVariable("DataConnection"), ServerVersion.AutoDetect(Environment.GetEnvironmentVariable("DataConnection"))));
+            }
+            else
+            {
+                builder.Services.AddDbContext<DataContext>(options => options.UseMySql(connectivity, ServerVersion.AutoDetect(connectivity)));
+            }
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
-
+           
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
-
+            
+            app.UseSwagger();
+            app.UseSwaggerUI();
+            
             app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseCors("AllowSpecificOrigin");
+
 
             app.UseAuthorization();
 

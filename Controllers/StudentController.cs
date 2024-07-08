@@ -11,10 +11,15 @@ namespace repository_pattern.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudent _student;
-        public StudentController(IStudent student)
+        private readonly IAuth _authService;
+        public StudentController(IStudent student, IAuth authService)
         {
                 _student = student;
+            _authService = authService;
         }
+      
+     
+
         [HttpPost("Create")]
         public IActionResult AddStudent(AddStudentDTO student)
         {
@@ -22,6 +27,26 @@ namespace repository_pattern.Controllers
             
             return Ok("successful");
         }
+
+
+      [HttpPost("Login")]
+        public async Task<IActionResult> LoginUser(LoginUserDTO student)
+        {
+            var user = await _authService.FindUserByUsername("email");
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var result = await _authService.LoginUser(student, user);
+            if (result.Item1 == true)
+            {
+                return Ok(result.Item2);
+            }
+       
+            return BadRequest();
+        }
+
+
         [HttpDelete("Delete")]
         public IActionResult DeleteStudentById(Guid id)
         {
@@ -32,6 +57,8 @@ namespace repository_pattern.Controllers
             }
             return Ok("successful");
         }
+
+
         [HttpGet("{id}")]
         public IActionResult GetStudentById(Guid id)
         {
@@ -46,8 +73,11 @@ namespace repository_pattern.Controllers
         [HttpGet("all")]
         public IActionResult GetAllStudents()
         {
-            return Ok(_student.GetAllStudents);
+            var students = _student.GetAllStudents();
+            return Ok(students);
         }
+
+
         [HttpPut("update")]
         public IActionResult UpdateStudentById(Student student)
         {

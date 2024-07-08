@@ -15,7 +15,9 @@ namespace repository_pattern.Services
         public void AddStudent(AddStudentDTO addStudentDTO)
         {
             Student student = new Student();
-            student.Name = addStudentDTO.Name;
+            student.Name = addStudentDTO.FirstName;
+            student.LastName = addStudentDTO.LastName;
+            student.Email = addStudentDTO.Email;
             student.StudentId = Guid.NewGuid();
 
             var Add = _dataContext.Students.Add(student);
@@ -56,7 +58,7 @@ namespace repository_pattern.Services
             FindStudent.Name = student.Name;
             _dataContext.SaveChanges();
             ShowStudentDTO showStudentDTO = new ShowStudentDTO();
-            showStudentDTO.Name = student.Name;
+            showStudentDTO.FirstName = student.Name;
             return showStudentDTO;
         }
     }
